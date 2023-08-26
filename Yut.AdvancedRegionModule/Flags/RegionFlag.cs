@@ -1,4 +1,6 @@
 ﻿using SDG.Unturned;
+using System.Collections;
+using UnityEngine;
 using Yut.AdvancedRegionModule.Database;
 using Yut.AdvancedRegionModule.Regions;
 using Yut.PoolModule;
@@ -30,6 +32,8 @@ namespace Yut.AdvancedRegionModule.Flags
         public abstract void Divest();
         public abstract void Reset();
         public abstract EConfigUpdateResult UpdateConfig(string key, string behaviour, string value);
+        public abstract Coroutine StartCoroutine(IEnumerator routine);
+        public abstract void StopCoroutine(Coroutine coroutine);
 
         internal abstract void Init(string flagType, Region region);
         internal abstract void Destroy();
@@ -72,6 +76,11 @@ namespace Yut.AdvancedRegionModule.Flags
             }
             return result;
         }
+        public sealed override Coroutine StartCoroutine(IEnumerator routine)
+            => region.StartCoroutine(routine);
+        public sealed override void StopCoroutine(Coroutine coroutine)
+            => region.StopCoroutine(coroutine);
+
         public sealed override void Divest() { }
         public sealed override void Reset() { }
 
