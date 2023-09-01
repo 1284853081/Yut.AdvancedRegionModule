@@ -109,6 +109,7 @@ namespace Yut.AdvancedRegionModule.Flags
             region.OnAnimalLeave -= OnAnimalLeave;
             region.OnRegionPreChange -= OnRegionPreChange;
             region.OnRegionChanged -= OnRegionChanged;
+            region.StopAllCoroutines();
         }
 
         /// <summary>

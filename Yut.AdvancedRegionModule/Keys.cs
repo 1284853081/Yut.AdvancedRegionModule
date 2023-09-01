@@ -52,9 +52,9 @@
         public const string KEY_DYNAMIC_REGION_TYPES = "DYNAMIC_REGION_TYPES";
         public const string VALUE_DYNAMIC_REGION_TYPES = "dynamic {0}";
         public const string KEY_STATIC_REGION = "STATIC_REGION";
-        public const string VALUE_STATIC_REGION = "static ID:{0} Type:{1} Name:{2} UniqueName{3}";
+        public const string VALUE_STATIC_REGION = "static ID:{0} Type:{1} Name:{2} UniqueName:{3}";
         public const string KEY_DYNAMIC_REGION = "DYNAMIC_REGION";
-        public const string VALUE_DYNAMIC_REGION = "dynamic ID:{0} Type:{1} Name:{2} UniqueName{3}";
+        public const string VALUE_DYNAMIC_REGION = "dynamic ID:{0} Type:{1} Name:{2} UniqueName:{3}";
         public const string KEY_STATIC_FLAG_TYPES = "STATIC_FLAG_TYPES";
         public const string VALUE_STATIC_FLAG_TYPES = "static {0}";
         public const string KEY_DYNAMIC_FLAG_TYPES = "DYNAMIC_FLAG_TYPES";

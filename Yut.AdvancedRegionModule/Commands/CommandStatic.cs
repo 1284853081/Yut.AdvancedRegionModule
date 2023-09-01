@@ -42,7 +42,7 @@ namespace Yut.AdvancedRegionModule.Commands
                     for (int i = 0; i < count; i++)
                     {
                         var region = regions[i];
-                        UnturnedChat.Say(caller, Yut.Instance.Translate(Keys.KEY_STATIC_REGION, region.RegionID, region.RegionType, region.UniqueName));
+                        UnturnedChat.Say(caller, Yut.Instance.Translate(Keys.KEY_STATIC_REGION, region.RegionID, region.RegionType, region.RegionName, region.UniqueName));
                     }
                 }
                 else if (command[0] == Keys.FLAGS)
