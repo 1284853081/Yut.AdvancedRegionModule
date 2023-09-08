@@ -82,16 +82,24 @@ namespace Yut.AdvancedRegionModule.Regions
                     return false;
             }
             int num = 0;
-            var count = Config.Points.Count;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < Config.Points.Count; i++)
             {
                 int nextInd = GetNextInd(i);
                 var curPoint = Config.Points[i];
                 var nextPoint = Config.Points[nextInd];
-                if (OnLine(vector, curPoint, nextPoint))
-                    return true;
-                if (CrossLine(vector, curPoint, nextPoint))
-                    num++;
+                var flag = vector.x >= Mathf.Min(curPoint.x, nextPoint.x) &&
+                    vector.x <= Mathf.Max(curPoint.x, nextPoint.x);
+                if (flag)
+                {
+                    var A = curPoint.z - nextPoint.z;
+                    var B = nextPoint.x - curPoint.x;
+                    var C = curPoint.x * nextPoint.z - curPoint.z * nextPoint.x;
+                    var num2 = A * vector.x + B * vector.z + C;
+                    if (num2 == 0)
+                        return true;
+                    if (num2 < 0)
+                        num++;
+                }
             }
             return num % 2 == 1;
         }
@@ -109,69 +117,6 @@ namespace Yut.AdvancedRegionModule.Regions
             return Vector3.zero;
         }
         private int GetNextInd(int currentInd)
-        {
-            if (currentInd < Config.Points.Count - 1)
-                return currentInd + 1;
-            return 0;
-        }
-        private bool OnLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
-        {
-            GetLimit(lineStart.x, lineEnd.x, out var num1, out var num2);
-            GetLimit(lineStart.z, lineEnd.z, out var num3, out var num4);
-            if (point.x < num1 || point.x > num2 || point.z < num3 || point.z > num4)
-                return false;
-            if (point.Equals(lineStart) || point.Equals(lineEnd))
-                return true;
-            if (point.x == num1 && point.x == num2)
-                return true;
-            var num5 = (point.z - lineStart.z) / (point.x - lineStart.x);
-            var num6 = (lineEnd.z - point.z) / (lineEnd.x - point.x);
-            if (num5 != num6)
-                return false;
-            return true;
-        }
-        private bool CrossLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
-        {
-            GetLimitPoint(lineStart, lineEnd, out var point2, out var point3);
-            if (point.x > Mathf.Max(point2.x, point3.x) || point.z > point2.z || point.z < point3.z)
-                return false;
-            if (point.z == point2.z && point.z == point3.z)
-                return false;
-            if (point.z == point2.z && point.z != point3.z)
-                return true;
-            if (point.z == point3.z && point.z != point2.z)
-                return false;
-            if (point2.x == point3.x)
-                return true;
-            if ((point.z - point3.z) * (point2.x - point3.x) / (point2.z - point3.z) + point3.x < point.x)
-                return false;
-            return true;
-        }
-        private void GetLimit(float x, float y, out float min, out float max)
-        {
-            if (x < y)
-            {
-                min = x;
-                max = y;
-            }
-            else
-            {
-                min = y;
-                max = x;
-            }
-        }
-        private void GetLimitPoint(Vector3 left, Vector3 right, out Vector3 up, out Vector3 down)
-        {
-            if (left.z < right.z)
-            {
-                down = left;
-                up = right;
-            }
-            else
-            {
-                down = right;
-                up = left;
-            }
-        }
+            => currentInd++ < Config.Points.Count - 1 ? currentInd : 0;
     }
 }
