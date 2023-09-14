@@ -84,3 +84,42 @@ RegionManager.Instance.RegisterStaticRegionType<RegionClass, RegionClassConfig>(
 ```
 2.自定义区域标记
 > 与自定义区域相同，继承RegionFlag<YourRegionFlagConfig>即可，其中YourRegionFlagConfig需要实现IRegionFlagConfig接口
+## 指令
+指令名字|指令类型|指令功能
+:-:|:-:
+static|基础|操控静态区域
+dynamic|基础|操控动态区域
+prism|扩展|操控多棱柱区域
+cylinder|扩展|操控圆柱区域
+sphere|扩展|操控球体区域
+### 指令大全
+> 区域有名字，唯一名字，id之分，名字为创建时指定的名称，但创建的同时会分配一个唯一名字防止出现名称冲突的情况，以下指令查找区域均通过唯一名字或id来查找，并统一用nid表示
+#### 基础系列
+1. /static types
+> 查看已注册的所有区域类型名字      
+2. /static regions
+> 查看所有已定义的静态区域      
+3. /static flags
+> 查看所有已注册的静态区域标记名字      
+4. /static destroy <nid>
+> 通过区域的id或唯一名字来销毁区域      
+5. /static flags <nid>
+> 查看指定区域绑定的所有标记      
+6. /static config <nid>
+> 查看指定区域的区域配置信息      
+7. /static show <nid>
+> 显示/关闭指定区域的区域边界      
+8. /static create <区域类型> <区域名字>
+> 创建指定名字指定类型的区域      
+9. /static config <nid> <标记名称>
+> 查看区域绑定的指定标记的配置信息      
+10. /static update <nid> flag <标记名称> bind/unbind
+> 为指定区域绑定/取消绑定指定标记      
+11. /static update <nid> config <key> <behaviour> <value>
+> 修改指定区域的配置      
+12. /static update <nid> flag <标记名称> update <key> <behaviour> <value>
+> 修改指定区域绑定的指定标记的配置      
+
+>  dynamic指令同上
+#### 扩展指令
+扩展指令用于单独调整不同区域，为区域设置提供便利
