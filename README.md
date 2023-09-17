@@ -92,7 +92,7 @@ RegionManager.Instance.RegisterStaticRegionType<RegionClass, RegionClassConfig>(
 > 与自定义区域相同，继承RegionFlag<YourRegionFlagConfig>即可，其中YourRegionFlagConfig需要实现IRegionFlagConfig接口
 ## 指令
 指令名字|指令类型|指令功能
-:-:|:-:
+:-:|:-:|:-:
 static|基础|操控静态区域
 dynamic|基础|操控动态区域
 prism|扩展|操控多棱柱区域
