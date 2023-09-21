@@ -25,8 +25,8 @@
 ```
 /prism static Test points add
 ```
-> 添加三个以上的点后区域开始生效
-4. 删除棱柱末尾边界点
+> 添加三个以上的点后区域开始生效      
+4.删除棱柱末尾边界点
 ```
 /prism static Test points remove
 ```
