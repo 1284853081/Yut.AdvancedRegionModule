@@ -47,10 +47,14 @@ namespace Yut.AdvancedRegionModule.Regions
                 return Config.Center;
             else
             {
-                var radius = Random.Range(0, Config.Radius);
-                var angle = Random.Range(0, 360f);
-                var quaternion = Quaternion.AngleAxis(angle, Vector3.up);
-                return Config.Center + quaternion * Vector3.forward * radius;
+                var circle = Random.insideUnitCircle;
+                var result = Config.Center + Random.Range(0,Config.Radius) * new Vector3(circle.x, 0, circle.y);
+                if(Config.Is3D)
+                {
+                    Config.GetLimitHeight(out var min, out var max);
+                    result += Vector3.up * Random.Range(min, max);
+                }
+                return result;
             }
         }
     }

@@ -243,7 +243,7 @@ namespace Yut.AdvancedRegionModule.Commands
                 else
                     UnturnedChat.Say(caller, Yut.Instance.Translate(Keys.KEY_ERROR_SYNTAX));
             }
-            else if (command.Length == 8)
+            else if (command.Length >= 8)
             {
                 if (command[0] == Keys.UPDATE)
                 {
@@ -264,7 +264,7 @@ namespace Yut.AdvancedRegionModule.Commands
                         UnturnedChat.Say(caller, Yut.Instance.Translate(Keys.KEY_FLAG_NOT_FOUND, command[3]));
                         return;
                     }
-                    var result = flag.UpdateConfig(command[5], command[6], command[7]);
+                    var result = flag.UpdateConfig(command[5], command[6], string.Join(" ", command, 7, command.Length - 7));
                     switch (result)
                     {
                         case EConfigUpdateResult.UndefinedKey:
@@ -291,6 +291,9 @@ namespace Yut.AdvancedRegionModule.Commands
                     UnturnedChat.Say(caller, Yut.Instance.Translate(Keys.KEY_ERROR_SYNTAX));
             }
             else
+            {
+
+            }
                 UnturnedChat.Say(caller, Yut.Instance.Translate(Keys.KEY_ERROR_SYNTAX));
         }
         public void ExecuteParams(IRocketPlayer caller, params string[] command)

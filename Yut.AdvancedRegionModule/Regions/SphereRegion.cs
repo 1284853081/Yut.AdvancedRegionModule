@@ -39,12 +39,7 @@ namespace Yut.AdvancedRegionModule.Regions
             if (Config.Radius <= 0)
                 return Config.Center;
             else
-            {
-                var radius = Random.Range(0, Config.Radius);
-                var angle = Random.Range(0, 360f);
-                var quaternion = Quaternion.AngleAxis(angle, Vector3.up);
-                return Config.Center + quaternion * Vector3.forward * radius;
-            }
+                return Config.Center + Random.Range(0, Config.Radius) * Random.insideUnitSphere;
         }
     }
 }

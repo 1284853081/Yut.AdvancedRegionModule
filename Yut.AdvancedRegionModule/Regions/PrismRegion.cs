@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Yut.UnturnedEx.Extensions;
 
 namespace Yut.AdvancedRegionModule.Regions
 {
@@ -106,17 +107,19 @@ namespace Yut.AdvancedRegionModule.Regions
         public override Vector3 RandomPointInRegion()
         {
             GetCoverRectangle(out var bottom, out var top);
+            Config.GetLimitHeight(out var min,out var max);
             for (var i = 0; i < 3; i++)
             {
                 var x = Random.Range(bottom.x, top.x);
                 var y = Random.Range(bottom.z, top.z);
                 var result = new Vector3(x, 0, y);
                 if (InRegion(result))
-                    return result;
+                    return Config.Is3D ? result + Vector3.up * Random.Range(min, max) : result;
             }
-            return Vector3.zero;
+            var point = Config.Points.Count == 0 ? Vector3.zero : Config.Points.RandomElements();
+            return Config.Is3D ? point + Vector3.up * Random.Range(min, max) : point;
         }
         private int GetNextInd(int currentInd)
-            => currentInd++ < Config.Points.Count - 1 ? currentInd : 0;
+            => (currentInd + 1) % Config.Points.Count;
     }
 }
